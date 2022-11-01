@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Patient = require("../model/patientModel");
+const Patients = require("../model/patientModel");
 
 // @desc    Add and retrieve patient general details
 
@@ -8,7 +8,7 @@ const Patient = require("../model/patientModel");
 // @access  Private
 //Create a new patient record
 router.post('/patients', async (req, res) => {
-    const newPatient = new Patient({
+    const newPatient = new Patients({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         dateOfBirth: req.body.dateOfBirth,
@@ -34,7 +34,7 @@ router.post('/patients', async (req, res) => {
 // Retrieve a list of all patients
 router.get('/patients', async (req, res) => {
     try {
-        const patients = await Patient.find();
+        const patients = await Patients.find();
         res.json(patients)
     } catch (error) {
         res.status(500).send({Error: error});
@@ -44,26 +44,18 @@ router.get('/patients', async (req, res) => {
 // @route   http://localhost:3500/patients/:patientId
 // @access  Private
 // Retriev general details of one patient
-router.get('/patients/:patientId',  getPatient, (req, res) => {
-    res.send(res.patient)
- })
-
-
-//  Function to retrieve a single patient info
- async function getPatient(req, res , next){
-    let patient
+router.get('/patients/:patientId', async (req, res) => {
     try {
-        patient = await Patient.findById(req.params.id)
-        if (patient == null) {
-            return res.status(404).json({message: 'Cannot Find Patient'})
+        const patient = await Patients.findById(req.params.patientId);
+        if (!patient) {
+            res.status(404).json({message: 'Cannot Find Patient'})
         }    
+        else {
+            res.status(200).json({patient})
+        }
     } catch (error) {
         res.status(500).send({Error: error});
     }
-
-    res.patient = patient
-    next()
- }
-
+ })
 
 module.exports = router;

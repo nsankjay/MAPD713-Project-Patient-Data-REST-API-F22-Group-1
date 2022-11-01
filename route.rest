@@ -1,4 +1,4 @@
  GET http://localhost:3500/patients
 ###
 
- GET http://localhost:3500/patients/1
+ GET http://localhost:3500/patients/6361158ffce52294bf8098e4
