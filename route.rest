@@ -1,0 +1,4 @@
+ GET http://localhost:3500/patients
+###
+
+ GET http://localhost:3500/patients/1
