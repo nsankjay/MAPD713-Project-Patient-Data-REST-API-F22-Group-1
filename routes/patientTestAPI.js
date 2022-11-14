@@ -25,6 +25,7 @@ router.post('/clinicalRecords', async (req, res) => {
     } catch (error) {
         res.status(500).send({Error: error});
     }
+    //@todo Above post API updates patient table with the criticalStatus field only
 })
 
 // @desc    Get Patient's all Test details
@@ -48,8 +49,8 @@ router.get('/clinicalRecords/:patiendId', async (req, res) => {
 router.get('/clinicalRecords/tests/:testId', async (req, res) => {
     try {
         const patientSingleTest = await PatientsTest.findById(req.params.testId);
-        if (!patientSingleTest) {
-            res.status(404).json({message: 'Cannot Find Test'})
+        if(!patientSingleTest) {
+            return res.status(404).json({message: 'Cannot Find Test'})
         }    
         else {
             res.status(200).json({patientSingleTest})

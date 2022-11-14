@@ -11,6 +11,7 @@ const patientSchema = new mongoose.Schema({
     emergencyContactNumber: {type: String, required: true},
     assignedDoctor: {type: String, required: true},
     department: {type: String, required: true},
+    criticalStatus: {type: Boolean, default: false},
 });
 
 module.exports = mongoose.model('Patient', patientSchema);
