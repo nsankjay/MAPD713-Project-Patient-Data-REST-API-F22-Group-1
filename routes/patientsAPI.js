@@ -2,11 +2,9 @@ const express = require('express');
 const router = express.Router();
 const Patients = require("../model/patientModel");
 
-// @desc    Add and retrieve patient general details
-
+// @desc    Add patient general details
 // @route   http://localhost:3500/patients
 // @access  Private
-//Create a new patient record
 router.post('/patients', async (req, res) => {
     const newPatient = new Patients({
         firstName: req.body.firstName,
@@ -29,9 +27,9 @@ router.post('/patients', async (req, res) => {
     }
 })
 
+// @desc    Retrieve List of all patients
 // @route   http://localhost:3500/patients
 // @access  Private
-// Retrieve a list of all patients
 router.get('/patients', async (req, res) => {
     try {
         const patients = await Patients.find();
@@ -41,9 +39,10 @@ router.get('/patients', async (req, res) => {
     }
 
 })
+
+// @desc    Retriev details of a single patient
 // @route   http://localhost:3500/patients/:patientId
 // @access  Private
-// Retriev general details of one patient
 router.get('/patients/:patientId', async (req, res) => {
     try {
         const patient = await Patients.findById(req.params.patientId);
