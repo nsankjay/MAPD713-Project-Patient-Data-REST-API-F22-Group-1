@@ -40,6 +40,18 @@ router.get('/', async (req, res) => {
     }
 
 })
+// @desc    Retrieve List of all Critical Patients
+// @route   http://localhost:3500/patients/criticalStatus
+// @access  Private
+router.get('/criticalStatus', async (req, res) => {
+    try {
+        const patients = await Patients.find({criticalStatus: true});
+        res.json(patients)
+    } catch (error) {
+        res.status(500).send({Error: error});
+    }
+
+})
 
 // @desc    Retriev details of a single patient
 // @route   http://localhost:3500/patients/:patientId
@@ -75,17 +87,5 @@ router.put('/criticalStatus/:patientId', async (req, res) => {
     }
  })
 
- // @desc    Retrieve List of all Critical Patients
-// @route   http://localhost:3500/patients/criticalStatus
-// @access  Private
-router.get('/criticalStatus', async (req, res) => {
-    try {
-        const patients = await Patients.find();
-        res.json(patients)
-    } catch (error) {
-        res.status(500).send({Error: error});
-    }
-
-})
 
 module.exports = router;
