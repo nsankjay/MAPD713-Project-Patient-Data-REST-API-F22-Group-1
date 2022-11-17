@@ -14,6 +14,7 @@ router.post('/register', async (req, res) => {
         password: req.body.password,
     });
     try {
+        console.log("regAPI", req.body)
         const userRegister = await newUser.save();
         const {_id} = userRegister._doc;
         return res.status(200).json({ message: "User Successful Registered", _id});
