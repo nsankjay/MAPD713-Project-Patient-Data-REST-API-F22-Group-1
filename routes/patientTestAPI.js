@@ -29,12 +29,12 @@ router.post('/clinicalRecords', async (req, res) => {
 })
 
 // @desc    Get Patient's all Test details
-// @route   http://localhost:3500/patients/clinicalRecords/:patiendId
+// @route   http://localhost:3500/patients/:patientId/tests
 // @access  Private
 // Retrieve a list of all patients
-router.get('/clinicalRecords/:patiendId', async (req, res) => {
+router.get('/:patientId/tests', async (req, res) => {
     try {
-        const patientsTestResults = await PatientsTest.find({ "patientId" : req.params.patiendId });
+        const patientsTestResults = await PatientsTest.find({ "patientId" : req.params.patientId });
         res.json(patientsTestResults)
     } catch (error) {
         res.status(500).send({Error: error});
@@ -43,10 +43,10 @@ router.get('/clinicalRecords/:patiendId', async (req, res) => {
 })
 
 // @desc    Get a Single Patient Test details
-// @route   http://localhost:3500/patients/clinicalRecords/tests/:testID
+// @route   http://localhost:3500/patients/tests/:testID
 // @access  Private
 // Retriev general details of one patient
-router.get('/clinicalRecords/tests/:testId', async (req, res) => {
+router.get('/tests/:testId', async (req, res) => {
     try {
         const patientSingleTest = await PatientsTest.findById(req.params.testId);
         if(!patientSingleTest) {
