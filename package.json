@@ -2,7 +2,7 @@
   "name": "mapd713-project-patient-data-rest-api-f22-group-1",
   "version": "1.0.0",
   "description": "Project: Patient Data REST API - MAPD713 Enterprise Technologies for Mobile Platforms - Fall 2022",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "node server",
     "dev": "nodemon server"
