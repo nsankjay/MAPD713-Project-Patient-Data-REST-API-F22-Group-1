@@ -2,6 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv').config();
 const connection = require('./dbconfig');
+const swaggerUI = require('swagger-ui-express');
+const swaggerJSDoc = require('./config/swaggerConfig');
 const server = express();
 const authApi = require('./routes/loginAPI');
 const registerApi = require('./routes/registerAPI');
@@ -12,6 +14,7 @@ connection();
 server.use(express.json());
 server.use(express.urlencoded({ extended: false }));
 server.use(cors());
+server.use('/api-doc', swaggerUI.serve, swaggerUI.setup(swaggerJSDoc))
 
 const PORT = process.env.PORT || 3500;
 
