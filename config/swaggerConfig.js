@@ -30,3 +30,5 @@ const option = {
 
 
 module.exports = option;
+
+//writing swagger config
